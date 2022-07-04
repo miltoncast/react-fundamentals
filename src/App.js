@@ -1,24 +1,33 @@
 import './App.css';
+import {pokemon} from './pokemon.js';
+
+
+function Card({
+  image,
+  name,
+  desc
+}) {
+
+  return (
+    <div className="card">
+      <img src={`images/${image}`} alt={image}/>
+      <h2>{name}</h2>
+      <p>{desc}</p>
+    </div>
+  )
+}
 
 function App() {
 
   return (
     <div className="App grid">
-      <div className="card">
-        <img src="/images/bulbasaur.jpg" alt="bulbasaur.jpg"/>
-        <h2>Bulbasaur</h2>
-        <p>A grass type pokemon</p>
-      </div>
-      <div className="card">
-        <img src="/images/charmander.jpg" alt="charmander.jpg"/>
-        <h2>Charmander</h2>
-        <p>A fire type pokemon</p>
-      </div>
-      <div className="card">
-        <img src="/images/squirtle.jpg" alt="squirtle.jpg"/>
-        <h2>Squirtle</h2>
-        <p>A water type pokemon</p>
-      </div>
+      {pokemon.map((item)=> {
+        return <Card
+          image={item.image}
+          name={item.name}
+          desc={item.desc}
+        />
+      })}
     </div>
   );
 }
