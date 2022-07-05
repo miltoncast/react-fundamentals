@@ -18,7 +18,7 @@ const Card = ({
 
   return (
     <div className="card">
-      <img src={`images/${image}`} alt={image}/>
+      <img src={image} alt={image}/>
       <h2>{name}</h2>
       <p>{desc}</p>
     </div>

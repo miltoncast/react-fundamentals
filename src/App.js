@@ -1,62 +1,29 @@
 import './App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from './components/Card.js';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [text, setText] = useState('');
-  const [name, setName] = useState('Bulbasaur');
-  const [showCard, setShowCard] = useState(false);
 
-  const handleInputChange = (e) => {
-    setText(e.target.value)
-  }
-
-  const handleNameChange = (e) => {
-    setName(e.target.value)
-  }
+  const [character, setCharacter] = useState({});
+  useEffect(()=> {
+    async function getCharacter() {
+      const resp = await fetch(
+        "https://rickandmortyapi.com/api/character/1"
+      );
+      setCharacter(await resp.json());
+    }
+    getCharacter();
+  }, []);
 
   return (
     <div className="App">
-      <div className="formField">
-        <button onClick={(e)=>{
-          setCount(count + 1)
-        }}>
-           Add
-        </button>
-        <p>{count}</p>
-      </div>
-
-      <div className="formField">
-        <h3>Input field</h3>
-        <input value={text} onChange={handleInputChange}/>
-      </div>
-
-      <div className="formField">
-        <h3>Name</h3>
-        <input value={name} onChange={handleNameChange}/>
-      </div>
-      <div className="formField">
-        <button onClick={(e)=>{
-            setShowCard(!showCard)
-          }} 
-          style={{
-            color: showCard ? 'green' : 'grey'
-          }}
-        >
-            Toggle Card
-        </button>
-      </div>
+      
       <div className="grid">
-        {
-          showCard ? (
           <Card 
-            image='bulbasaur.jpg'
-            name ={name}
-            desc ={text}
+            image={character.image}
+            name ={character.name}
+            desc ={character.species}
           />
-          ) : (false)
-        }
       </div>
     </div>
   );
