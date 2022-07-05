@@ -92,3 +92,9 @@
     flex-direction: column;
   }
 }
+
+.formField {
+  padding: 10px;
+  /* display: flex; */
+
+}
